@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="MVVMDemo.Pages.DashboardPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:vm="clr-namespace:MVVMDemo.ViewModel"
+    ios:Page.UseSafeArea="True">
+    <ContentPage.Content>
+        <StackLayout Grid.Row="1" Margin="8,0,8,30">
+            <CollectionView
+                x:Name="lst"
+                Margin="0"
+                ItemsSource="{Binding GifList}"
+                VerticalScrollBarVisibility="Never">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Image
+                                BackgroundColor="LightGray"
+                                IsAnimationPlaying="{Binding IsPlay}"
+                                Source="JustSmileAndWave.gif">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ListItemCommand, Source={RelativeSource AncestorType={x:Type vm:DashboardPageViewModel}}}" CommandParameter="{Binding .}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
